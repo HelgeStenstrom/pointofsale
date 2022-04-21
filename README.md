@@ -16,9 +16,9 @@ Let's see if the techniques works with Haskell too.
 
 ### Test plan
 
+* Represent fraction by whole number
 * Add integers
   * 0 + 0
   * Something + 0
   * 0 + Something
   * something + something else
-
