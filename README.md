@@ -22,3 +22,8 @@ Let's see if the techniques works with Haskell too.
   * Something + 0
   * 0 + Something
   * something + something else
+
+### TO do list
+
+* Split the tests into separate files
+* String representation for whole number fraction (Show)

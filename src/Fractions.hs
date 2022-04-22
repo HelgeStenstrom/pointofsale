@@ -1,3 +1,5 @@
 module Fractions where
 
-newtype Fraction = Fraction Integer deriving Show
+newtype Fraction =
+  Whole Integer
+  deriving (Show, Eq)

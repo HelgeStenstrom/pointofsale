@@ -11,12 +11,14 @@ main = do
 
 test1 = TestCase (assertEqual "besrivning" 3 3)
 test2 = TestCase (assertEqual "besrivning" 3 Lib.threex)
+test3 = TestCase (assertEqual "Same integers" (Whole 3) (Whole 3))
 
 tests = TestList [
     TestLabel "tst1" test1
   , TestLabel "tst2" test2
+  , TestLabel "tst3" test3
   ]
 
 
-f1 = Fraction 3
-f2 = Fraction (-5)
+f1 = Whole 3
+f2 = Whole (-5)
