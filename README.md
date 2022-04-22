@@ -16,7 +16,8 @@ Let's see if the techniques works with Haskell too.
 
 ### Test plan
 
-* Represent fraction by whole number
+* Represent fraction by whole number DONE
+* String representation of whole number DONE
 * Add integers
   * 0 + 0
   * Something + 0
