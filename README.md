@@ -5,6 +5,9 @@ But first: Working with fractions.
 Based on JBrains' course "The world's best introduction to TDD", which happens to use Java.
 Let's see if the techniques works with Haskell too.
 
+Inspiration when I'm stuck (but don't deviate from the TDD path!):
+<http://5outh.blogspot.com/2012/08/haskell-implementing-fractional-data.html>
+
 ## General workflow considerations
 
 * Use HUnit first, since it resembles JUnit more than QuickCheck do. In other words, make assertions on the values returned from functions.
