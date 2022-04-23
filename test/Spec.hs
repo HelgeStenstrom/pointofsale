@@ -6,18 +6,21 @@ import Fractions
 main :: IO ()
 -- main = putStrLn "Test suite not yet implemented"
 main = do
-  runTestTT tests
+  runTestTT wholeTests
   return ()
 
-test1 = TestCase (assertEqual "same integers are equal" 3 3)
+testNotSame = TestCase (assertBool "Not same integers" (Whole 1 /= Whole 3))
 
-test2 = TestCase (assertEqual "besrivning" 3 Lib.threex)
+testEqual1 = TestCase (assertBool "Same integers" (Whole 3 == Whole 3))
 
-test3 = TestCase (assertEqual "Same integers" (Whole 3) (Whole 3))
+testEqual2 = TestCase (assertEqual "Same integers" (Whole 3) (Whole 3))
 
-test4 = TestCase (assertEqual "string rep" "3/1" (show $ Whole 3))
+testStringRep = TestCase (assertEqual "string rep" "3/1" (show $ Whole 3))
 
-tests = TestList [test1, test2, test3, test4]
+-- The denominator of a whole number is 1.
+testWholeDenominator = TestCase(assertEqual "denom of whole number is 1" 1( denom (Whole 17)))
+
+wholeTests = TestList [testNotSame, testEqual1, testEqual2, testStringRep, testWholeDenominator]
 
 f1 = Whole 3
 
