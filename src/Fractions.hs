@@ -1,16 +1,19 @@
 module Fractions where
 
-data Fraction =
-  Whole Integer | Frac Integer Integer
+data Fraction
+  = Whole Integer
+  | Frac Integer
+         Integer
 
 instance Show Fraction where
   show (Whole a) = show a ++ "/1"
-  show (Frac a b) = "wrong"
+  show (Frac n d) = show n ++ "/" ++ show d
 
 instance Eq Fraction where
   Whole a == Whole b = a == b
-  (Frac a b) == _ = False 
-  _ == (Frac c d) = False 
+  (Whole a) == (Frac n d) = a == n
+  (Frac n d) == (Whole a) = n == a
+  (Frac a b) == (Frac c d) = False
 
 denom (Whole _) = 1
 denom (Frac a b) = 4711
