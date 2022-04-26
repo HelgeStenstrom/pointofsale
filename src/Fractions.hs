@@ -16,4 +16,7 @@ instance Eq Fraction where
   (Frac a b) == (Frac c d) =  (a == c) && (b == d)
 
 denom (Whole _) = 1
-denom (Frac a b) = b
+denom (Frac _ b) = b
+
+numer (Frac a _) = a
+numer (Whole n) = n

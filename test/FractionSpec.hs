@@ -78,8 +78,14 @@ exText = "" ++ printf " %d %d" (10 :: Integer) (20 :: Integer)
 testWholeDenominator =
   TestCase (assertEqual "denom of whole number is 1" 1 (denom (Whole 17)))
 
-testFracDenom = TestCase (assertEqual "Getting the denominator" 3 (denom (Frac 5 3)))
--- testFracNumerator = TestCase (assertEqual "Getting the numerator" 5 (numer (Frac 5 3)))
+testFracDenom =
+  TestCase (assertEqual "Getting the denominator" 3 (denom (Frac 5 3)))
+
+testFracNumerator =
+  TestCase (assertEqual "Getting the numerator" 5 (numer (Frac 5 3)))
+
+testWholeNumerator =
+  TestCase (assertEqual "Getting the numerator" 7 (numer (Whole 7)))
 
 wholeTests =
   TestList
@@ -89,7 +95,9 @@ wholeTests =
     , testStringRepWhole
     , testStringRepFrac
     , testWholeDenominator
+    , testWholeNumerator
     , testFracDenom
+    , testFracNumerator
     , fracEqualsWhole 4
     , fracEqualsWhole 5
     , wholeEqualsFrac 6
