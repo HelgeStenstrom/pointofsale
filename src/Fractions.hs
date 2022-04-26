@@ -16,4 +16,4 @@ instance Eq Fraction where
   (Frac a b) == (Frac c d) =  (a == c) && (b == d)
 
 denom (Whole _) = 1
-denom (Frac a b) = 4711
+denom (Frac a b) = b
