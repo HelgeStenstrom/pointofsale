@@ -13,7 +13,7 @@ instance Eq Fraction where
   Whole a == Whole b = a == b
   (Whole a) == (Frac n d) = a == n
   (Frac n d) == (Whole a) = n == a
-  (Frac a b) == (Frac c d) = False
+  (Frac a b) == (Frac c d) =  (a == c) && (b == d)
 
 denom (Whole _) = 1
 denom (Frac a b) = 4711

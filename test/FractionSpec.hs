@@ -6,6 +6,8 @@ import Test.HUnit (Test(TestCase, TestList), assertBool, assertEqual, runTestTT)
 
 import Fractions
 
+import Text.Printf
+
 testNotSame = TestCase (assertBool "Not same integers" (Whole 1 /= Whole 3))
 
 testEqual1 = TestCase (assertBool "Same integers" (Whole 3 == Whole 3))
@@ -48,6 +50,30 @@ wholeNotEqualsFrac n =
        ("Whole " ++ show (n + 1) ++ " /= Frac " ++ show n ++ " 1")
        (Whole (n + 1) /= Frac n 1))
 
+fraqEqual :: Integer -> Integer -> Test
+fraqEqual n d =
+  TestCase
+    (assertBool
+       (printf "Frac %d %d == Frac %d %d" n d n d)
+       (Frac n d == Frac n d))
+
+fraqNotEqualDiffNominator :: Integer -> Integer -> Test
+fraqNotEqualDiffNominator n d =
+  TestCase
+    (assertBool
+       (printf "Frac %d %d /= Frac %d %d" (n + 1) d n d)
+       (Frac (n + 1) d /= Frac n d))
+
+fraqNotEqualDiffDenominator :: Integer -> Integer -> Test
+fraqNotEqualDiffDenominator n d =
+  TestCase
+    (assertBool
+       (printf "Frac %d %d /= Frac %d %d" n (d + 1) n d)
+       (Frac n (d + 1) /= Frac n d))
+
+exText :: [Char]
+exText = "" ++ printf " %d %d" (10 :: Integer) (20 :: Integer)
+
 -- | The denominator of a whole number is 1.
 testWholeDenominator =
   TestCase (assertEqual "denom of whole number is 1" 1 (denom (Whole 17)))
@@ -66,6 +92,12 @@ wholeTests =
     , wholeEqualsFrac 7
     , fracNotEqualsWhole 8
     , wholeNotEqualsFrac 9
+    , fraqEqual 3 4
+    , fraqEqual (-7) 13
+    , fraqNotEqualDiffNominator 3 4
+    , fraqNotEqualDiffNominator 5 6
+    , fraqNotEqualDiffDenominator 7 8
+    , fraqNotEqualDiffDenominator 9 10
     ]
 
 exampl = Frac 3 4 == Frac 5 6
