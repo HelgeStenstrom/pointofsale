@@ -52,6 +52,7 @@ test-suite pointofsale-test
   main-is: Spec.hs
   other-modules:
       Paths_pointofsale
+    , FractionSpec
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
