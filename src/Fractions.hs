@@ -39,13 +39,13 @@ instance Num Fraction where
   abs (Frac n d)
     | numer (simplify (Frac n d)) < 0 = Frac (-n) d
     | otherwise = Frac n d
-  signum (Whole n) 
+  signum (Whole n)
     | n < 0 = Whole (-1)
-    | otherwise  = Whole 1
+    | otherwise = Whole 1
   signum (Frac n d)
     | numer (Frac n d) < 0 = Whole (-1)
-    | otherwise  = Whole 1
-  fromInteger = undefined
+    | otherwise = Whole 1
+  fromInteger = Whole 
   (-) = undefined
 
 simplify :: Fraction -> Fraction
