@@ -8,8 +8,7 @@ import Fractions
 
 import Text.Printf
 
-fractionTests = TestList [wholeTests, fracTests]
-
+fractionTests = TestList [wholeTests, fracTests, simplifyTests]
 
 wholeTests =
   TestList
@@ -72,8 +71,6 @@ wholeNotEqualsFrac n =
        ("Whole " ++ show (n + 1) ++ " /= Frac " ++ show n ++ " 1")
        (Whole (n + 1) /= Frac n 1))
 
-
-
 exText :: [Char]
 exText = "" ++ printf " %d %d" (10 :: Integer) (20 :: Integer)
 
@@ -90,12 +87,9 @@ testFracNumerator =
 testWholeNumerator =
   TestCase (assertEqual "Getting the numerator" 7 (numer (Whole 7)))
 
-
-
-
-fracTests = 
+fracTests =
   TestList
-      [ fraqEqual 3 4
+    [ fraqEqual 3 4
     , fraqEqual (-7) 13
     , fraqNotEqualDiffNominator 3 4
     , fraqNotEqualDiffNominator 5 6
@@ -124,6 +118,8 @@ fraqNotEqualDiffDenominator n d =
        (printf "Frac %d %d /= Frac %d %d" n (d + 1) n d)
        (Frac n (d + 1) /= Frac n d))
 
+simplifyTests = TestList [testSimplifyFrac (Frac 4 2) (Frac 2 1)]
 
+testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))
 
-exampl = Frac 3 4 == Frac 5 6
+xx = simplify
