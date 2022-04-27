@@ -95,8 +95,10 @@ fracTests =
     , fraqNotEqualDiffNominator 5 6
     , fraqNotEqualDiffDenominator 7 8
     , fraqNotEqualDiffDenominator 9 10
-    , fraqsEqual (Frac 3 4) (Frac 3 4)
+    , fraqsEqual (Frac 3 4) (Frac 300 400)
     , fraqsEqual (Frac 30 40) (Frac 3 4)
+    , fraqsEqual (Whole 3) (Frac 30 10)
+    , fraqsEqual (Frac 30 10) (Whole 3) 
     ]
 
 fraqEqual :: Integer -> Integer -> Test
@@ -132,7 +134,7 @@ simplifyTests =
 
 testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))
 
-operatorTests = TestList [plusTests, timesTests]
+operatorTests = TestList [plusTests, timesTests, absTests]
 
 plusTests =
   TestList
@@ -149,7 +151,22 @@ timesTests =
     , testTimes (Frac 2 3) (Frac 5 7) (Frac 10 21)
     ]
 
+absTests =
+  TestList
+    [ testAbs (Whole (-1)) (Whole 1)
+    , testAbs (Frac (-6) 3) (Whole 2)
+    , testAbs (Frac 6 3) (Whole 2)
+    ]
+
+signumTests = TestList [testSignum (Whole (-3)), testSignum (Frac 2 3)]
+
 testPlus :: Fraction -> Fraction -> Fraction -> Test
 testPlus f1 f2 fs = TestCase (assertEqual "plus" fs (f1 + f2))
 
+testTimes :: Fraction -> Fraction -> Fraction -> Test
 testTimes f1 f2 fs = TestCase (assertEqual "times" fs (f1 * f2))
+
+testAbs :: Fraction -> Fraction -> Test
+testAbs fin fexpected = TestCase (assertEqual "abs" fexpected (abs fin))
+
+testSignum f = TestCase (assertEqual "signum" f (abs f * signum f))
