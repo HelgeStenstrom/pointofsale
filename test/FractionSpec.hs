@@ -8,7 +8,7 @@ import Fractions
 
 import Text.Printf
 
-fractionTests = TestList [wholeTests, fracTests, simplifyTests]
+fractionTests = TestList [wholeTests, fracTests, simplifyTests, operatorTests]
 
 wholeTests =
   TestList
@@ -108,11 +108,7 @@ fraqEqual n d =
 
 fraqsEqual :: Fraction -> Fraction -> Test
 fraqsEqual f1 f2 =
-  TestCase
-    (assertEqual
-       (printf "%s == %s" (show f1) (show f2)) 
-       f2 f1
-       )
+  TestCase (assertEqual (printf "%s == %s" (show f1) (show f2)) f2 f1)
 
 fraqNotEqualDiffNominator :: Integer -> Integer -> Test
 fraqNotEqualDiffNominator n d =
@@ -128,8 +124,32 @@ fraqNotEqualDiffDenominator n d =
        (printf "Frac %d %d /= Frac %d %d" n (d + 1) n d)
        (Frac n (d + 1) /= Frac n d))
 
-simplifyTests = TestList [
-  testSimplifyFrac (Frac 4 2) (Frac 2 1)
-  , testSimplifyFrac (Frac 6 9 ) (Frac 2 3)]
+simplifyTests =
+  TestList
+    [ testSimplifyFrac (Frac 4 2) (Frac 2 1)
+    , testSimplifyFrac (Frac 6 9) (Frac 2 3)
+    ]
 
 testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))
+
+operatorTests = TestList [plusTests, timesTests]
+
+plusTests =
+  TestList
+    [ testPlus (Whole 1) (Whole 2) (Whole 3)
+    , testPlus (Frac 1 3) (Frac 2 3) (Whole 1)
+    , testPlus (Whole 1) (Frac 1 3) (Frac 4 3)
+    ]
+
+timesTests =
+  TestList
+    [ testTimes (Whole (-2)) (Whole 3) (Whole (-6))
+    , testTimes (Frac 3 5) (Whole 7) (Frac 21 5)
+    , testTimes (Whole 2) (Frac 2 5) (Frac 4 5)
+    , testTimes (Frac 2 3) (Frac 5 7) (Frac 10 21)
+    ]
+
+testPlus :: Fraction -> Fraction -> Fraction -> Test
+testPlus f1 f2 fs = TestCase (assertEqual "plus" fs (f1 + f2))
+
+testTimes f1 f2 fs = TestCase (assertEqual "times" fs (f1 * f2))

@@ -13,10 +13,10 @@ instance Eq Fraction where
   Whole a == Whole b = a == b
   (Whole a) == (Frac n d) = a == n
   (Frac n d) == (Whole a) = n == a
-  f1 == f2 = (a1 == c1) && (b1 == d1) where
-    (Frac a1 b1) = simplify f1
-    (Frac c1 d1) = simplify f2
-
+  f1 == f2 = (a1 == c1) && (b1 == d1)
+    where
+      (Frac a1 b1) = simplify f1
+      (Frac c1 d1) = simplify f2
 
 denom (Whole _) = 1
 denom (Frac _ b) = b
@@ -25,8 +25,14 @@ numer (Frac a _) = a
 numer (Whole n) = n
 
 instance Num Fraction where
-  (+) = undefined
-  (*) = undefined
+  (+) (Whole a) (Whole b) = Whole (a + b)
+  (+) (Frac a b) (Frac c d) = simplify (Frac (a * d + b * c) (b * d))
+  (+) (Frac n d) f2 = f2 + Frac n d
+  (+) (Whole a) f2 = Frac a 1 + f2
+  (*) (Whole a) (Whole b) = Whole (a*b)
+  (*) (Frac a b) (Frac c d) = Frac (a*c) (b * d)
+  (*) f1 (Whole c) = f1 * Frac c 1
+  (*) (Whole n) f2 = f2 * Whole n
   abs = undefined
   signum = undefined
   fromInteger = undefined
