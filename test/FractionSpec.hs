@@ -98,7 +98,7 @@ fracTests =
     , fraqsEqual (Frac 3 4) (Frac 300 400)
     , fraqsEqual (Frac 30 40) (Frac 3 4)
     , fraqsEqual (Whole 3) (Frac 30 10)
-    , fraqsEqual (Frac 30 10) (Whole 3) 
+    , fraqsEqual (Frac 30 10) (Whole 3)
     ]
 
 fraqEqual :: Integer -> Integer -> Test
@@ -134,7 +134,7 @@ simplifyTests =
 
 testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))
 
-operatorTests = TestList [plusTests, timesTests, absTests]
+operatorTests = TestList [plusTests, timesTests, absTests, signumTests]
 
 plusTests =
   TestList
