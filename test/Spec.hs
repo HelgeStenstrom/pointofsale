@@ -6,6 +6,6 @@ import Fractions
 
 main :: IO ()
 main = do
-  runTestTT wholeTests
+  runTestTT fractionTests
   -- TODO: run QuickCheck too. I want to compare the techniques.
   return ()

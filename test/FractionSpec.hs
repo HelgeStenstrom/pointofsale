@@ -1,5 +1,5 @@
 module FractionSpec
-  ( wholeTests
+  ( fractionTests
   ) where
 
 import Test.HUnit (Test(TestCase, TestList), assertBool, assertEqual, runTestTT)
@@ -7,6 +7,28 @@ import Test.HUnit (Test(TestCase, TestList), assertBool, assertEqual, runTestTT)
 import Fractions
 
 import Text.Printf
+
+fractionTests = TestList [wholeTests, fracTests]
+
+
+wholeTests =
+  TestList
+    [ testNotSame
+    , testEqual1
+    , testEqual2
+    , testStringRepWhole
+    , testStringRepFrac
+    , testWholeDenominator
+    , testWholeNumerator
+    , testFracDenom
+    , testFracNumerator
+    , fracEqualsWhole 4
+    , fracEqualsWhole 5
+    , wholeEqualsFrac 6
+    , wholeEqualsFrac 7
+    , fracNotEqualsWhole 8
+    , wholeNotEqualsFrac 9
+    ]
 
 testNotSame = TestCase (assertBool "Not same integers" (Whole 1 /= Whole 3))
 
@@ -50,6 +72,37 @@ wholeNotEqualsFrac n =
        ("Whole " ++ show (n + 1) ++ " /= Frac " ++ show n ++ " 1")
        (Whole (n + 1) /= Frac n 1))
 
+
+
+exText :: [Char]
+exText = "" ++ printf " %d %d" (10 :: Integer) (20 :: Integer)
+
+-- | The denominator of a whole number is 1.
+testWholeDenominator =
+  TestCase (assertEqual "denom of whole number is 1" 1 (denom (Whole 17)))
+
+testFracDenom =
+  TestCase (assertEqual "Getting the denominator" 3 (denom (Frac 5 3)))
+
+testFracNumerator =
+  TestCase (assertEqual "Getting the numerator" 5 (numer (Frac 5 3)))
+
+testWholeNumerator =
+  TestCase (assertEqual "Getting the numerator" 7 (numer (Whole 7)))
+
+
+
+
+fracTests = 
+  TestList
+      [ fraqEqual 3 4
+    , fraqEqual (-7) 13
+    , fraqNotEqualDiffNominator 3 4
+    , fraqNotEqualDiffNominator 5 6
+    , fraqNotEqualDiffDenominator 7 8
+    , fraqNotEqualDiffDenominator 9 10
+    ]
+
 fraqEqual :: Integer -> Integer -> Test
 fraqEqual n d =
   TestCase
@@ -71,45 +124,6 @@ fraqNotEqualDiffDenominator n d =
        (printf "Frac %d %d /= Frac %d %d" n (d + 1) n d)
        (Frac n (d + 1) /= Frac n d))
 
-exText :: [Char]
-exText = "" ++ printf " %d %d" (10 :: Integer) (20 :: Integer)
 
--- | The denominator of a whole number is 1.
-testWholeDenominator =
-  TestCase (assertEqual "denom of whole number is 1" 1 (denom (Whole 17)))
-
-testFracDenom =
-  TestCase (assertEqual "Getting the denominator" 3 (denom (Frac 5 3)))
-
-testFracNumerator =
-  TestCase (assertEqual "Getting the numerator" 5 (numer (Frac 5 3)))
-
-testWholeNumerator =
-  TestCase (assertEqual "Getting the numerator" 7 (numer (Whole 7)))
-
-wholeTests =
-  TestList
-    [ testNotSame
-    , testEqual1
-    , testEqual2
-    , testStringRepWhole
-    , testStringRepFrac
-    , testWholeDenominator
-    , testWholeNumerator
-    , testFracDenom
-    , testFracNumerator
-    , fracEqualsWhole 4
-    , fracEqualsWhole 5
-    , wholeEqualsFrac 6
-    , wholeEqualsFrac 7
-    , fracNotEqualsWhole 8
-    , wholeNotEqualsFrac 9
-    , fraqEqual 3 4
-    , fraqEqual (-7) 13
-    , fraqNotEqualDiffNominator 3 4
-    , fraqNotEqualDiffNominator 5 6
-    , fraqNotEqualDiffDenominator 7 8
-    , fraqNotEqualDiffDenominator 9 10
-    ]
 
 exampl = Frac 3 4 == Frac 5 6

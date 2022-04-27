@@ -20,3 +20,11 @@ denom (Frac _ b) = b
 
 numer (Frac a _) = a
 numer (Whole n) = n
+
+instance Num Fraction where
+  (+) = undefined 
+  (*) = undefined 
+  abs = undefined 
+  signum = undefined 
+  fromInteger  = undefined 
+  (-) = undefined 
