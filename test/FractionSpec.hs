@@ -95,6 +95,8 @@ fracTests =
     , fraqNotEqualDiffNominator 5 6
     , fraqNotEqualDiffDenominator 7 8
     , fraqNotEqualDiffDenominator 9 10
+    , fraqsEqual (Frac 3 4) (Frac 3 4)
+    , fraqsEqual (Frac 30 40) (Frac 3 4)
     ]
 
 fraqEqual :: Integer -> Integer -> Test
@@ -103,6 +105,14 @@ fraqEqual n d =
     (assertBool
        (printf "Frac %d %d == Frac %d %d" n d n d)
        (Frac n d == Frac n d))
+
+fraqsEqual :: Fraction -> Fraction -> Test
+fraqsEqual f1 f2 =
+  TestCase
+    (assertEqual
+       (printf "%s == %s" (show f1) (show f2)) 
+       f2 f1
+       )
 
 fraqNotEqualDiffNominator :: Integer -> Integer -> Test
 fraqNotEqualDiffNominator n d =
@@ -118,6 +128,8 @@ fraqNotEqualDiffDenominator n d =
        (printf "Frac %d %d /= Frac %d %d" n (d + 1) n d)
        (Frac n (d + 1) /= Frac n d))
 
-simplifyTests = TestList [testSimplifyFrac (Frac 4 2) (Frac 2 1)]
+simplifyTests = TestList [
+  testSimplifyFrac (Frac 4 2) (Frac 2 1)
+  , testSimplifyFrac (Frac 6 9 ) (Frac 2 3)]
 
 testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))

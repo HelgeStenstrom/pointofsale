@@ -13,7 +13,10 @@ instance Eq Fraction where
   Whole a == Whole b = a == b
   (Whole a) == (Frac n d) = a == n
   (Frac n d) == (Whole a) = n == a
-  (Frac a b) == (Frac c d) = (a == c) && (b == d)
+  f1 == f2 = (a1 == c1) && (b1 == d1) where
+    (Frac a1 b1) = simplify f1
+    (Frac c1 d1) = simplify f2
+
 
 denom (Whole _) = 1
 denom (Frac _ b) = b
