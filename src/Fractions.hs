@@ -6,7 +6,7 @@ data Fraction
          Integer
 
 instance Show Fraction where
-  show (Whole a) = show a ++ "/1"
+  show (Whole a) = show a ++ ""
   show (Frac n d) = show n ++ "/" ++ show d
 
 instance Eq Fraction where

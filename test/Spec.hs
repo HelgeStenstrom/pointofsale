@@ -8,7 +8,5 @@ import Fractions
 main :: IO ()
 main = do
   runTestTT fractionTests
-  hereAmI 
-  qsExample
-  -- TODO: run QuickCheck too. I want to compare the techniques.
+  allQuickChecks 
   return ()

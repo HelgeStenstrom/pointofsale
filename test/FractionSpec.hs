@@ -36,7 +36,7 @@ testEqual1 = TestCase (assertBool "Same integers" (Whole 3 == Whole 3))
 testEqual2 = TestCase (assertEqual "Same integers" (Whole 3) (Whole 3))
 
 testStringRepWhole =
-  TestCase (assertEqual "string rep Whole 3" "3/1" (show $ Whole 3))
+  TestCase (assertEqual "string rep Whole 3" "3" (show $ Whole 3))
 
 testStringRepFrac =
   TestCase (assertEqual "string rep Frac 5 4" "5/4" (show $ Frac 5 4))
