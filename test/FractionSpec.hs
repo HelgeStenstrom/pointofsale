@@ -135,7 +135,8 @@ simplifyTests =
 testSimplifyFrac f1 f2 = TestCase (assertEqual "simplify" f2 (simplify f1))
 
 operatorTests =
-  TestList [plusTests, timesTests, absTests, signumTests, fromIntegerTests]
+  TestList
+    [plusTests, minusTests, timesTests, absTests, signumTests, fromIntegerTests]
 
 plusTests =
   TestList
@@ -150,6 +151,13 @@ timesTests =
     , testTimes (Frac 3 5) (Whole 7) (Frac 21 5)
     , testTimes (Whole 2) (Frac 2 5) (Frac 4 5)
     , testTimes (Frac 2 3) (Frac 5 7) (Frac 10 21)
+    ]
+
+minusTests =
+  TestList
+    [ testMinus (Whole 3) (Whole 5) (Whole (-2))
+    , testMinus (Frac 1 3) (Whole 1) (Frac (-2) 3)
+    , testMinus (Frac 1 3) (Frac 1 1) (Frac (-2) 3)
     ]
 
 absTests =
@@ -168,6 +176,9 @@ testPlus f1 f2 fs = TestCase (assertEqual "plus" fs (f1 + f2))
 
 testTimes :: Fraction -> Fraction -> Fraction -> Test
 testTimes f1 f2 fs = TestCase (assertEqual "times" fs (f1 * f2))
+
+testMinus :: Fraction -> Fraction -> Fraction -> Test
+testMinus f1 f2 fs = TestCase (assertEqual "minus" fs (f1 - f2))
 
 testAbs :: Fraction -> Fraction -> Test
 testAbs fin fexpected = TestCase (assertEqual "abs" fexpected (abs fin))

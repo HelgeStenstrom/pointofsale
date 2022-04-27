@@ -33,6 +33,7 @@ instance Num Fraction where
   (*) (Frac a b) (Frac c d) = Frac (a * c) (b * d)
   (*) f1 (Whole c) = f1 * Frac c 1
   (*) (Whole n) f2 = f2 * Whole n
+  negate f = Whole (-1) * f
   abs (Whole n)
     | n < 0 = Whole (-n)
     | otherwise = Whole n
@@ -45,8 +46,7 @@ instance Num Fraction where
   signum (Frac n d)
     | numer (Frac n d) < 0 = Whole (-1)
     | otherwise = Whole 1
-  fromInteger = Whole 
-  (-) = undefined
+  fromInteger = Whole
 
 simplify :: Fraction -> Fraction
 simplify (Frac n d) = Frac nn dd
