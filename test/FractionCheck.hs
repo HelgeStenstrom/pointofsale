@@ -5,23 +5,24 @@ import Test.QuickCheck
 
 hereAmI = putStrLn "Here am I, the QuickCheck file!"
 
-nt :: Testable prop => [Char] -> prop -> IO ()
-nt s t = do
-  putStrLn ("\n" ++ s)
-  quickCheck t
-
 allQuickChecks :: IO ()
 allQuickChecks = do
   nt "integers" propCommutativeInt
   nt "fractions" propCommutativeFraction
-
-qsExample = quickCheck propCommutativeFraction
 
 propCommutativeInt :: Int -> Int -> Bool
 propCommutativeInt x y = x + y == y + x
 
 propCommutativeFraction :: Fraction -> Fraction -> Bool
 propCommutativeFraction x y = x + y == y + x
+
+propAddFraction = undefined -- What can we say about numbers, without copying the implementation?
+
+-- ======== test support below ======================
+nt :: Testable prop => [Char] -> prop -> IO ()
+nt s t = do
+  putStrLn ("\n" ++ s)
+  quickCheck t
 
 fractionWholeGen :: Gen Fraction
 fractionWholeGen = do
