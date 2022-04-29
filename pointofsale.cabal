@@ -27,6 +27,7 @@ library
   exposed-modules:
       Lib
     , Fractions
+    , PointOfSale
   other-modules:
       Paths_pointofsale
   hs-source-dirs:
@@ -54,6 +55,7 @@ test-suite pointofsale-test
       Paths_pointofsale
     , FractionSpec
     , FractionCheck
+    , PointOfSaleTest
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
