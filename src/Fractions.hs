@@ -55,3 +55,9 @@ simplify (Frac n d) = Frac nn dd
     nn = quot n factor
     dd = quot d factor
 simplify (Whole n) = Whole n
+
+instance Ord Fraction where
+  (<=) (Frac a b) (Frac c d) = a*d <= b*c
+  (<=) (Whole a) (Whole b) = a <= b
+  (<=) (Frac a b) (Whole c) = a <= b*c
+  (<=) (Whole a) (Frac c d) = a*d <= c

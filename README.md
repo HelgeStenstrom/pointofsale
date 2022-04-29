@@ -31,3 +31,8 @@ Inspiration when I'm stuck (but don't deviate from the TDD path!):
 
 * Split the tests into separate files
 * String representation for whole number fraction (Show)
+
+## Web links that helped me
+
+* Generating arbitrary but non-zero denominators:
+<https://stackoverflow.com/questions/39291494/only-generate-positive-integers-with-quickcheck>.
