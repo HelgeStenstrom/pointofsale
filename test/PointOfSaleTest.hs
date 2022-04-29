@@ -8,9 +8,8 @@ import Test.HUnit (Test(TestCase, TestList), assertEqual)
 
 x = fromPos
 
-posTests = TestList [testOneItemFound]
+posTests = TestList [testOneItemFound, testAnotherItemFound]
 
-testOneItemFound  = TestCase (assertEqual "price of barcode 123" "$1.99" (displayText "12345")) 
+testOneItemFound  = TestCase (assertEqual "price of barcode 12345" "$1.99" (displayText "12345")) 
+testAnotherItemFound  = TestCase (assertEqual "price of barcode 45678" "$12.00" (displayText "45678")) 
 
-displayText :: String -> String
-displayText _ = "$1.99"
