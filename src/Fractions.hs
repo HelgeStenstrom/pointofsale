@@ -61,3 +61,9 @@ instance Ord Fraction where
   (<=) (Whole a) (Whole b) = a <= b
   (<=) (Frac a b) (Whole c) = a <= b*c
   (<=) (Whole a) (Frac c d) = a*d <= c
+
+
+instance Fractional Fraction where
+  (/) _ _ = undefined 
+  recip _ = undefined 
+  fromRational _ = undefined 

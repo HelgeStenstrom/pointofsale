@@ -22,6 +22,9 @@ propAddFraction = undefined -- What can we say about numbers, without copying th
 propFracOrder :: Fraction -> Bool
 propFracOrder f1 = f1 <= (f1 + Whole 1)
 
+
+-- TODO: Write tests for Fractional
+
 -- ======== test support below ======================
 nt :: Testable prop => [Char] -> prop -> IO ()
 nt s t = do
