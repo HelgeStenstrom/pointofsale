@@ -13,8 +13,10 @@ displayText bc
 iteration = do
   bc <- getLine
   putStr $ displayText bc
+  putStr "\n"
   return ()
 
 main :: IO ()
 main = forever $ do iteration
 -- Hur kan en funktion "komma ihåg"?
+
